@@ -30,13 +30,18 @@ class ViewController: UIViewController, UITextFieldDelegate  {
             textView?.text = ""
             textField.resignFirstResponder()
             activityIndicatorView?.hidden = false;
-            client?.dailyForecast(textField.text) { (error, response, dictionary) -> () in
+            client?.currentWeather(textField.text) { (error, response, dictionary) -> () in
                 self.activityIndicatorView?.hidden = true;
                 if let sError = error {
                     self.textView?.text = "Some error occured. Try again."
                 } else {
                     if let sDictionary = dictionary {
                         self.textView?.text = "Received data: \(sDictionary)"
+                        
+                        // Get temperature for city this way:
+                        let city = dictionary["name"] as? String;
+                        let temperature = dictionary["main"]["temp"] as Int;
+                        println("City: \(city) Temperature: \(temperature)")
                     }
                 }
             }
