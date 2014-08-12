@@ -11,6 +11,7 @@
 		60048F15199A078C00DE5EC6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60048F14199A078C00DE5EC6 /* ViewController.swift */; };
 		60048F18199A078C00DE5EC6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60048F16199A078C00DE5EC6 /* Main.storyboard */; };
 		60048F1A199A078C00DE5EC6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60048F19199A078C00DE5EC6 /* Images.xcassets */; };
+		60048F64199A46AA00DE5EC6 /* Sweather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60048F63199A46AA00DE5EC6 /* Sweather.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		60048F14199A078C00DE5EC6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		60048F17199A078C00DE5EC6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		60048F19199A078C00DE5EC6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		60048F63199A46AA00DE5EC6 /* Sweather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sweather.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +39,7 @@
 			isa = PBXGroup;
 			children = (
 				60048F0F199A078C00DE5EC6 /* Example */,
+				60048F61199A469900DE5EC6 /* Vendor */,
 				60048F0E199A078C00DE5EC6 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -67,6 +70,23 @@
 				60048F11199A078C00DE5EC6 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		60048F61199A469900DE5EC6 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				60048F62199A46AA00DE5EC6 /* Sweather */,
+			);
+			name = Vendor;
+			sourceTree = "<group>";
+		};
+		60048F62199A46AA00DE5EC6 /* Sweather */ = {
+			isa = PBXGroup;
+			children = (
+				60048F63199A46AA00DE5EC6 /* Sweather.swift */,
+			);
+			name = Sweather;
+			path = ../Sweather;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,6 +158,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60048F64199A46AA00DE5EC6 /* Sweather.swift in Sources */,
 				60048F15199A078C00DE5EC6 /* ViewController.swift in Sources */,
 				60048F13199A078C00DE5EC6 /* AppDelegate.swift in Sources */,
 			);
@@ -275,6 +296,7 @@
 				60048F2B199A078C00DE5EC6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
