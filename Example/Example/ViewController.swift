@@ -38,7 +38,7 @@ class ViewController: UIViewController, UITextFieldDelegate  {
                     if let sDictionary = dictionary {
                         self.textView?.text = "Received data: \(sDictionary)"
                         
-                        // Get temperature for city this way:
+                        // Get temperature for city this way
                         let city = dictionary["name"] as? String;
                         let temperature = dictionary["main"]["temp"] as Int;
                         println("City: \(city) Temperature: \(temperature)")
