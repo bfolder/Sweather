@@ -112,4 +112,45 @@ class SweatherTests: XCTestCase {
         }
         waitForExpectationsWithTimeout(5, handler: nil)
     }
+    
+    // MARK: Forecast
+    
+    func testForecastByName() {
+        let expectation = expectationWithDescription("dailyForecastByName")
+        client.forecast("Berlin") { (error, response, data) -> () in
+            if let url = response?.URL.absoluteString {
+                XCTAssertEqual("http://api.openweathermap.org/data/2.5/forecast?q=Berlin&APPID=1234&lang=sp&units=metric", url);
+                XCTAssertNotNil(data)
+                XCTAssertEqual(data["city"]["name"] as String, "Berlin")
+                expectation.fulfill()
+            }
+        }
+        waitForExpectationsWithTimeout(5, handler: nil)
+    }
+    
+    func testForecastById() {
+        let expectation = expectationWithDescription("dailyForecastById")
+        client.forecast(2950159) { (error, response, data) -> () in
+            if let url = response?.URL.absoluteString {
+                XCTAssertEqual("http://api.openweathermap.org/data/2.5/forecast?id=2950159&APPID=1234&lang=sp&units=metric", url);
+                XCTAssertNotNil(data)
+                XCTAssertEqual(data["city"]["name"] as String, "Berlin")
+                expectation.fulfill()
+            }
+        }
+        waitForExpectationsWithTimeout(5, handler: nil)
+    }
+    
+    func testForecastByCoordinate() {
+        let expectation = expectationWithDescription("dailyForecastByCoordinate")
+        client.forecast(CLLocationCoordinate2D(latitude: 52, longitude: 13)) { (error, response, data) -> () in
+            if let url = response?.URL.absoluteString {
+                XCTAssertEqual("http://api.openweathermap.org/data/2.5/forecast?lat=52.0&lon=13.0&APPID=1234&lang=sp&units=metric", url);
+                XCTAssertNotNil(data)
+                XCTAssertEqual(data["city"]["name"] as String, "Niedergorsdorf")
+                expectation.fulfill()
+            }
+        }
+        waitForExpectationsWithTimeout(5, handler: nil)
+    }
 }

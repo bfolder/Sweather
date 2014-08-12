@@ -74,10 +74,12 @@ public class Sweather {
     }
     
     public func dailyForecast(coordinate: CLLocationCoordinate2D, callback: (NSError!, NSURLResponse!, NSDictionary!) -> ()) {
+        call("/forecast/daily?lat=\(coordinate.latitude)&lon=\(coordinate.longitude)", callback: callback);
         
     }
     
     public func dailyForecast(cityId: Int, callback: (NSError!, NSURLResponse!, NSDictionary!) -> ()) {
+        call("/forecast/daily?id=\(cityId)", callback: callback);
         
     }
     
