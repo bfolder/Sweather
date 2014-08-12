@@ -31,14 +31,12 @@ class ViewController: UIViewController, UITextFieldDelegate  {
             textField.resignFirstResponder()
             activityIndicatorView?.hidden = false;
             client?.dailyForecast(textField.text) { (error, response, dictionary) -> () in
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.activityIndicatorView?.hidden = true;
-                    if let sError = error {
-                        self.textView?.text = "Some error occured. Try again."
-                    } else {
-                        if let sDictionary = dictionary {
-                            self.textView?.text = "Received data: \(sDictionary)"
-                        }
+                self.activityIndicatorView?.hidden = true;
+                if let sError = error {
+                    self.textView?.text = "Some error occured. Try again."
+                } else {
+                    if let sDictionary = dictionary {
+                        self.textView?.text = "Received data: \(sDictionary)"
                     }
                 }
             }

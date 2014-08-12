@@ -115,6 +115,7 @@ public class Sweather {
     private func call(method: String, callback: (NSError!, NSURLResponse!, NSDictionary!) -> ()) {
         let url = Defines.basePath + apiVersion + method + "&APPID=\(apiKey)&lang=\(language)&units=\(temperatureFormat.toRaw())"
         let request = NSURLRequest(URL: NSURL(string: url))
+        let currentQueue = NSOperationQueue.currentQueue();
         
         NSURLConnection.sendAsynchronousRequest(request, queue: queue) { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             var anError: NSError? = error
@@ -124,7 +125,9 @@ public class Sweather {
                dictionary = NSJSONSerialization.JSONObjectWithData(sData, options: NSJSONReadingOptions.MutableContainers, error: &anError) as? NSDictionary;
             }
             
-            callback(error, response, dictionary)
+            currentQueue.addOperationWithBlock {
+                callback(error, response, dictionary)
+            }
         }
     }
 }
