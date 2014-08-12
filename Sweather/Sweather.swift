@@ -13,7 +13,6 @@ public class Sweather {
     public enum TemperatureFormat: String {
         case Celcius = "metric"
         case Fahrenheit = "imperial"
-        case Default = ""
     }
     
     public var apiKey: String
@@ -31,15 +30,15 @@ public class Sweather {
     // MARK: Initialization
     
     public convenience init(apiKey: String) {
-        self.init(apiKey: apiKey, language: "en", temperatureFormat: TemperatureFormat.Default, apiVersion: "2,5")
+        self.init(apiKey: apiKey, language: "en", temperatureFormat: TemperatureFormat.Fahrenheit, apiVersion: "2.5")
     }
     
     public convenience init(apiKey: String, temperatureFormat: TemperatureFormat) {
-        self.init(apiKey: apiKey, language: "en", temperatureFormat: temperatureFormat, apiVersion: "2,5")
+        self.init(apiKey: apiKey, language: "en", temperatureFormat: temperatureFormat, apiVersion: "2.5")
     }
     
     public convenience init(apiKey: String, language: String, temperatureFormat: TemperatureFormat) {
-        self.init(apiKey: apiKey, language: language, temperatureFormat: temperatureFormat, apiVersion: "2,5")
+        self.init(apiKey: apiKey, language: language, temperatureFormat: temperatureFormat, apiVersion: "2.5")
     }
     
     public init(apiKey: String, language: String, temperatureFormat: TemperatureFormat, apiVersion: String) {
@@ -116,7 +115,6 @@ public class Sweather {
     private func call(method: String, callback: (NSError!, NSURLResponse!, NSDictionary!) -> ()) {
         let url = Defines.basePath + apiVersion + method + "&APPID=\(apiKey)&lang=\(language)&units=\(temperatureFormat.toRaw())"
         let request = NSURLRequest(URL: NSURL(string: url))
-        println(url)
         
         NSURLConnection.sendAsynchronousRequest(request, queue: queue) { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             var anError: NSError? = error

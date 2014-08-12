@@ -1,50 +1,73 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6205" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6205" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="mBm-zo-8Rx">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6198"/>
         <capability name="Constraints with attributes relative to the layout margin" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
-        <scene sceneID="ufC-wZ-h7g">
+        <scene sceneID="P74-pL-EOI">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="mBm-zo-8Rx" customClass="ViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
-                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
+                        <viewControllerLayoutGuide type="top" id="akq-DM-QhV"/>
+                        <viewControllerLayoutGuide type="bottom" id="JXm-VA-eIx"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                    <view key="view" contentMode="scaleToFill" id="7Of-3L-n2l">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Daily forecast for city..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fMZ-XL-pbb">
-                                <rect key="frame" x="16" y="41" width="568" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Daily forecast for city..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="o1I-Ht-5Qa">
+                                <rect key="frame" x="16" y="34" width="568" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="search"/>
                                 <connections>
-                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="i7c-N9-O9Q"/>
+                                    <outlet property="delegate" destination="mBm-zo-8Rx" id="Pv7-4U-9yR"/>
                                 </connections>
                             </textField>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="JwK-3S-6C1">
-                                <rect key="frame" x="290" y="254" width="20" height="20"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Kn1-ZR-MjF">
+                                <rect key="frame" x="290" y="290" width="20" height="20"/>
                             </activityIndicatorView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AQT-Hz-IfQ">
+                                <rect key="frame" x="15" y="65" width="570" height="535"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="JwK-3S-6C1" secondAttribute="centerX" id="4SI-BO-g4b"/>
-                            <constraint firstItem="fMZ-XL-pbb" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="FTo-tf-8Vl"/>
-                            <constraint firstItem="fMZ-XL-pbb" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="21" id="Hmj-Bd-CrK"/>
-                            <constraint firstItem="fMZ-XL-pbb" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="dHS-S9-J4U"/>
-                            <constraint firstAttribute="centerY" secondItem="JwK-3S-6C1" secondAttribute="centerY" id="jlA-yW-NwZ"/>
+                            <constraint firstAttribute="trailing" secondItem="AQT-Hz-IfQ" secondAttribute="trailing" id="GJ7-7M-HWT"/>
+                            <constraint firstAttribute="trailing" secondItem="o1I-Ht-5Qa" secondAttribute="trailing" constant="16" id="ICZ-C3-kGu"/>
+                            <constraint firstItem="o1I-Ht-5Qa" firstAttribute="leading" secondItem="7Of-3L-n2l" secondAttribute="leading" constant="16" id="O2G-TU-3kp"/>
+                            <constraint firstItem="AQT-Hz-IfQ" firstAttribute="leading" secondItem="7Of-3L-n2l" secondAttribute="leading" id="QRA-gC-aJe"/>
+                            <constraint firstAttribute="trailing" secondItem="AQT-Hz-IfQ" secondAttribute="trailing" constant="15" id="Xh6-JG-hRB"/>
+                            <constraint firstItem="JXm-VA-eIx" firstAttribute="top" secondItem="AQT-Hz-IfQ" secondAttribute="bottom" id="hd0-BR-B3w"/>
+                            <constraint firstItem="AQT-Hz-IfQ" firstAttribute="top" secondItem="7Of-3L-n2l" secondAttribute="topMargin" constant="65" id="hkg-sk-Hx6"/>
+                            <constraint firstItem="AQT-Hz-IfQ" firstAttribute="leading" secondItem="7Of-3L-n2l" secondAttribute="leading" constant="15" id="i5d-Jj-GaX"/>
+                            <constraint firstItem="o1I-Ht-5Qa" firstAttribute="top" secondItem="akq-DM-QhV" secondAttribute="bottom" constant="14" id="iJx-pz-Cwt"/>
+                            <constraint firstAttribute="centerX" secondItem="Kn1-ZR-MjF" secondAttribute="centerX" id="ol1-CJ-oBc"/>
+                            <constraint firstItem="AQT-Hz-IfQ" firstAttribute="top" secondItem="7Of-3L-n2l" secondAttribute="top" id="szA-eu-WuA"/>
+                            <constraint firstAttribute="centerY" secondItem="Kn1-ZR-MjF" secondAttribute="centerY" id="teq-C2-exD"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="GJ7-7M-HWT"/>
+                                <exclude reference="QRA-gC-aJe"/>
+                                <exclude reference="szA-eu-WuA"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
-                        <outlet property="activityIndicatorView" destination="JwK-3S-6C1" id="yhT-df-euj"/>
-                        <outlet property="textField" destination="fMZ-XL-pbb" id="PLB-fx-C1u"/>
+                        <outlet property="activityIndicatorView" destination="Kn1-ZR-MjF" id="vej-3A-5SZ"/>
+                        <outlet property="textField" destination="o1I-Ht-5Qa" id="wRb-R5-S8x"/>
+                        <outlet property="textView" destination="AQT-Hz-IfQ" id="MeY-17-7qM"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ihy-1i-30y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="58" y="305"/>
         </scene>
     </scenes>
 </document>
