@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 import XCTest
 
 class SweatherTests: XCTestCase {
@@ -14,7 +15,7 @@ class SweatherTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        client = Sweather(apiKey: "1234", language: "sp", temperatureFormat: Sweather.TemperatureFormat.Celcius, apiVersion: "2.4");
+        client = Sweather(apiKey: "1234", language: "sp", temperatureFormat: Sweather.TemperatureFormat.Celcius, apiVersion: "2.5");
     }
     
     override func tearDown() {
@@ -26,6 +27,49 @@ class SweatherTests: XCTestCase {
         XCTAssertEqual(client.language, "sp")
         XCTAssertEqual(client.apiKey, "1234");
         XCTAssertEqual(client.temperatureFormat, Sweather.TemperatureFormat.Celcius)
-        XCTAssertEqual(client.apiVersion, "2.4")
+        XCTAssertEqual(client.apiVersion, "2.5")
     }
-}
+    
+    // MARK: Service tests
+    // MARK: Current weather
+    
+    func testCurrentWeatherByName() {
+        let expectation = expectationWithDescription("currentWeatherByName")
+        client.currentWeather("Berlin") { (error, response, data) -> () in
+            if let url = response?.URL.absoluteString {
+                XCTAssertEqual("http://api.openweathermap.org/data/2.5/weather?q=Berlin&APPID=1234&lang=sp&units=metric", url);
+                XCTAssertNotNil(data)
+                XCTAssertEqual(data["name"] as String, "Berlin")
+                expectation.fulfill()
+            }
+        }
+        waitForExpectationsWithTimeout(5, handler: nil)
+    }
+    
+    func testCurrentWeatherById() {
+        let expectation = expectationWithDescription("currentWeatherById")
+        client.currentWeather(2950159) { (error, response, data) -> () in
+            if let url = response?.URL.absoluteString {
+                XCTAssertEqual("http://api.openweathermap.org/data/2.5/weather?id=2950159&APPID=1234&lang=sp&units=metric", url);
+                XCTAssertNotNil(data)
+                XCTAssertEqual(data["name"] as String, "Berlin")
+                expectation.fulfill()
+            }
+        }
+        waitForExpectationsWithTimeout(5, handler: nil)
+    }
+    
+    func testCurrentWeatherByCoordinate() {
+        let expectation = expectationWithDescription("currentWeatherById")
+        client.currentWeather(CLLocationCoordinate2D(latitude: 52, longitude: 13)) { (error, response, data) -> () in
+            if let url = response?.URL.absoluteString {
+                XCTAssertEqual("http://api.openweathermap.org/data/2.5/weather?lat=52.0&lon=13.0&APPID=1234&lang=sp&units=metric", url);
+                XCTAssertNotNil(data)
+                XCTAssertEqual(data["name"] as String, "Niedergorsdorf")
+                expectation.fulfill()
+            }
+        }
+        waitForExpectationsWithTimeout(5, handler: nil)
+    }
+    
+    // MARK: Daily forecast}
