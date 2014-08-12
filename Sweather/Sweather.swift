@@ -11,7 +11,7 @@ import CoreLocation
 
 public class Sweather {
     public enum TemperatureFormat {
-        case Kelvin, Celcius, Fahrenheit
+        case Celcius, Fahrenheit
     }
     
     public var apiKey:String
@@ -99,7 +99,7 @@ public class Sweather {
     }
     
     // MARK: --
-    // MARK: Call to api
+    // MARK: Call the api
     
     private func call(method: String, callback: () -> (NSError, Dictionary<String, String>)) {
         

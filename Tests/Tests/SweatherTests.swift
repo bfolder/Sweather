@@ -10,9 +10,11 @@ import UIKit
 import XCTest
 
 class SweatherTests: XCTestCase {
+    var client:Sweather!;
+    
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        client = Sweather(apiKey: "1234", language: "sp", temperatureFormat: Sweather.TemperatureFormat.Celcius, apiVersion: "2.4");
     }
     
     override func tearDown() {
@@ -20,16 +22,10 @@ class SweatherTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
+    func testInit() {
+        XCTAssertEqual(client.language, "sp")
+        XCTAssertEqual(client.apiKey, "1234");
+        XCTAssertEqual(client.temperatureFormat, Sweather.TemperatureFormat.Celcius)
+        XCTAssertEqual(client.apiVersion, "2.4")
     }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock() {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
 }
