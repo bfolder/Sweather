@@ -64,14 +64,13 @@ public class Sweather {
     
     public func currentWeather(cityId: Int, callback: (NSError!, NSURLResponse!, NSDictionary!) -> ()) {
         call("/weather?id=\(cityId)", callback: callback);
-        
     }
     
     // MARK: --
     // MARK: Retrieving daily forecast
     
     public func dailyForecast(cityName: String, callback: (NSError!, NSURLResponse!, NSDictionary!) -> ()) {
-        
+        call("/forecast/daily?q=\(cityName)", callback: callback);
     }
     
     public func dailyForecast(coordinate: CLLocationCoordinate2D, callback: (NSError!, NSURLResponse!, NSDictionary!) -> ()) {

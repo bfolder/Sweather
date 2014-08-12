@@ -30,7 +30,7 @@ class SweatherTests: XCTestCase {
         XCTAssertEqual(client.apiVersion, "2.5")
     }
     
-    // MARK: Service tests
+    // MARK: ---
     // MARK: Current weather
     
     func testCurrentWeatherByName() {
@@ -72,4 +72,44 @@ class SweatherTests: XCTestCase {
         waitForExpectationsWithTimeout(5, handler: nil)
     }
     
-    // MARK: Daily forecast}
+    // MARK: Daily forecast
+    
+    func testDailyForecastByName() {
+        let expectation = expectationWithDescription("dailyForecastByName")
+        client.dailyForecast("Berlin") { (error, response, data) -> () in
+            if let url = response?.URL.absoluteString {
+                XCTAssertEqual("http://api.openweathermap.org/data/2.5/forecast/daily?q=Berlin&APPID=1234&lang=sp&units=metric", url);
+                XCTAssertNotNil(data)
+                XCTAssertEqual(data["city"]["name"] as String, "Berlin")
+                expectation.fulfill()
+            }
+        }
+        waitForExpectationsWithTimeout(5, handler: nil)
+    }
+    
+    func testDailyForecastById() {
+        let expectation = expectationWithDescription("dailyForecastById")
+        client.dailyForecast(2950159) { (error, response, data) -> () in
+            if let url = response?.URL.absoluteString {
+                XCTAssertEqual("http://api.openweathermap.org/data/2.5/forecast/daily?id=2950159&APPID=1234&lang=sp&units=metric", url);
+                XCTAssertNotNil(data)
+                XCTAssertEqual(data["city"]["name"] as String, "Berlin")
+                expectation.fulfill()
+            }
+        }
+        waitForExpectationsWithTimeout(5, handler: nil)
+    }
+    
+    func testDailyForecastByCoordinate() {
+        let expectation = expectationWithDescription("dailyForecastByCoordinate")
+        client.dailyForecast(CLLocationCoordinate2D(latitude: 52, longitude: 13)) { (error, response, data) -> () in
+            if let url = response?.URL.absoluteString {
+                XCTAssertEqual("http://api.openweathermap.org/data/2.5/forecast/daily?lat=52.0&lon=13.0&APPID=1234&lang=sp&units=metric", url);
+                XCTAssertNotNil(data)
+                XCTAssertEqual(data["city"]["name"] as String, "Niedergorsdorf")
+                expectation.fulfill()
+            }
+        }
+        waitForExpectationsWithTimeout(5, handler: nil)
+    }
+}
