@@ -153,4 +153,32 @@ class SweatherTests: XCTestCase {
         }
         waitForExpectationsWithTimeout(5, handler: nil)
     }
+    
+    // MARK: Forecast
+    
+    func testFindCityByName() {
+        let expectation = expectationWithDescription("findCityByName")
+        client.findCity("Berlin") { (error, response, data) -> () in
+            if let url = response?.URL.absoluteString {
+                XCTAssertEqual("http://api.openweathermap.org/data/2.5/find?q=Berlin&APPID=1234&lang=sp&units=metric", url);
+                XCTAssertNotNil(data)
+                XCTAssertEqual(data["city"]["name"] as String, "Berlin")
+                expectation.fulfill()
+            }
+        }
+        waitForExpectationsWithTimeout(5, handler: nil)
+    }
+    
+    func testFindCityByCoordinate() {
+        let expectation = expectationWithDescription("findCityByCoordinate")
+        client.findCity(CLLocationCoordinate2D(latitude: 52.0, longitude: 13.0)) { (error, response, data) -> () in
+            if let url = response?.URL.absoluteString {
+                XCTAssertEqual("http://api.openweathermap.org/data/2.5/find?lat=52.0&lon=13.0&APPID=1234&lang=sp&units=metric", url);
+                XCTAssertNotNil(data)
+                XCTAssertEqual(data["city"]["name"] as String, "Niedergorsdorf")
+                expectation.fulfill()
+            }
+        }
+        waitForExpectationsWithTimeout(5, handler: nil)
+    }
 }

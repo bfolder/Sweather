@@ -87,15 +87,15 @@ public class Sweather {
     // MARK: Retrieving forecast
     
     public func forecast(cityName: String, callback: (NSError!, NSURLResponse!, NSDictionary!) -> ()) {
-        
+        call("/forecast?q=\(cityName)", callback: callback);
     }
     
     public func forecast(coordinate: CLLocationCoordinate2D, callback: (NSError!, NSURLResponse!, NSDictionary!) -> ()) {
-        
+        call("/forecast?lat=\(coordinate.latitude)&lon=\(coordinate.longitude)", callback: callback);
     }
     
     public func forecast(cityId: Int, callback: (NSError!, NSURLResponse!, NSDictionary!) ->()) {
-        
+        call("/forecast?id=\(cityId)", callback: callback);
     }
     
     // MARK: --
