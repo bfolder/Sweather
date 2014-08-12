@@ -102,12 +102,12 @@ public class Sweather {
     // MARK: Retrieving city 
     
     public func findCity(cityName: String, callback: (NSError!, NSURLResponse!, NSDictionary!) -> ()) {
-        
+        call("/find?q=\(cityName)", callback: callback);
     }
     
     
     public func findCity(coordinate: CLLocationCoordinate2D, callback: (NSError!, NSURLResponse!, NSDictionary!) -> ()) {
-        
+        call("/find?lat=\(coordinate.latitude)&lon=\(coordinate.longitude)", callback: callback);
     }
     
     // MARK: --

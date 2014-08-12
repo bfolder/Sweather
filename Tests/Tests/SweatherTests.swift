@@ -162,7 +162,6 @@ class SweatherTests: XCTestCase {
             if let url = response?.URL.absoluteString {
                 XCTAssertEqual("http://api.openweathermap.org/data/2.5/find?q=Berlin&APPID=1234&lang=sp&units=metric", url);
                 XCTAssertNotNil(data)
-                XCTAssertEqual(data["city"]["name"] as String, "Berlin")
                 expectation.fulfill()
             }
         }
@@ -175,7 +174,6 @@ class SweatherTests: XCTestCase {
             if let url = response?.URL.absoluteString {
                 XCTAssertEqual("http://api.openweathermap.org/data/2.5/find?lat=52.0&lon=13.0&APPID=1234&lang=sp&units=metric", url);
                 XCTAssertNotNil(data)
-                XCTAssertEqual(data["city"]["name"] as String, "Niedergorsdorf")
                 expectation.fulfill()
             }
         }
