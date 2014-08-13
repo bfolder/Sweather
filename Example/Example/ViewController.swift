@@ -32,11 +32,11 @@ class ViewController: UIViewController, UITextFieldDelegate  {
             activityIndicatorView?.hidden = false;
             client?.currentWeather(textField.text) { (error, response, dictionary) -> () in
                 self.activityIndicatorView?.hidden = true;
-                if let sError = error {
+                if let error = error {
                     self.textView?.text = "Some error occured. Try again."
                 } else {
-                    if let sDictionary = dictionary {
-                        self.textView?.text = "Received data: \(sDictionary)"
+                    if let dictionary = dictionary {
+                        self.textView?.text = "Received data: \(dictionary)"
                         
                         // Get temperature for city this way
                         let city = dictionary["name"] as? String;
@@ -47,7 +47,6 @@ class ViewController: UIViewController, UITextFieldDelegate  {
             }
             return true
         }
-        
         return false
     }
 }
