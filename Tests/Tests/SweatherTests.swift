@@ -15,7 +15,7 @@ class SweatherTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        client = Sweather(apiKey: "1234", language: "sp", temperatureFormat: Sweather.TemperatureFormat.Celcius, apiVersion: "2.5");
+        client = Sweather(apiKey: "1234", language: "sp", temperatureFormat: .Celcius, apiVersion: "2.5");
     }
     
     override func tearDown() {

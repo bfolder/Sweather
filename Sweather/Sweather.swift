@@ -30,7 +30,7 @@ public class Sweather {
     // MARK: Initialization
     
     public convenience init(apiKey: String) {
-        self.init(apiKey: apiKey, language: "en", temperatureFormat: TemperatureFormat.Fahrenheit, apiVersion: "2.5")
+        self.init(apiKey: apiKey, language: "en", temperatureFormat: .Fahrenheit, apiVersion: "2.5")
     }
     
     public convenience init(apiKey: String, temperatureFormat: TemperatureFormat) {
