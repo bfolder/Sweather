@@ -15,6 +15,29 @@ public class Sweather {
         case Fahrenheit = "imperial"
     }
     
+    public enum Result {
+        case Success(NSURLResponse!, NSDictionary!)
+        case Error(NSURLResponse!, NSError!)
+        
+        public func data() -> NSDictionary? {
+            switch self {
+            case .Success(let response, let dictionary):
+                return dictionary
+            case .Error(let response, let error):
+                return nil
+            }
+        }
+        
+        public func response() -> NSURLResponse? {
+            switch self {
+            case .Success(let response, let dictionary):
+                return response
+            case .Error(let response, let error):
+                return response
+            }
+        }
+    }
+    
     public var apiKey: String
     public var apiVersion: String
     public var language: String
@@ -52,66 +75,66 @@ public class Sweather {
     // MARK: -
     // MARK: Retrieving current weather data
     
-    public func currentWeather(cityName: String, callback: (NSError!, NSURLResponse!, NSDictionary!) -> ()) {
+    public func currentWeather(cityName: String, callback: (Result) -> ()) {
         call("/weather?q=\(cityName)", callback: callback);
     }
     
-    public func currentWeather(coordinate: CLLocationCoordinate2D, callback: (NSError!, NSURLResponse!, NSDictionary!) -> ()) {
+    public func currentWeather(coordinate: CLLocationCoordinate2D, callback: (Result) -> ()) {
         let coordinateString = "lat=\(coordinate.latitude)&lon=\(coordinate.longitude)"
         call("/weather?\(coordinateString)", callback: callback);
     }
     
-    public func currentWeather(cityId: Int, callback: (NSError!, NSURLResponse!, NSDictionary!) -> ()) {
+    public func currentWeather(cityId: Int, callback: (Result) -> ()) {
         call("/weather?id=\(cityId)", callback: callback);
     }
     
     // MARK: -
     // MARK: Retrieving daily forecast
     
-    public func dailyForecast(cityName: String, callback: (NSError!, NSURLResponse!, NSDictionary!) -> ()) {
+    public func dailyForecast(cityName: String, callback: (Result) -> ()) {
         call("/forecast/daily?q=\(cityName)", callback: callback);
     }
     
-    public func dailyForecast(coordinate: CLLocationCoordinate2D, callback: (NSError!, NSURLResponse!, NSDictionary!) -> ()) {
+    public func dailyForecast(coordinate: CLLocationCoordinate2D, callback: (Result) -> ()) {
         call("/forecast/daily?lat=\(coordinate.latitude)&lon=\(coordinate.longitude)", callback: callback);
         
     }
     
-    public func dailyForecast(cityId: Int, callback: (NSError!, NSURLResponse!, NSDictionary!) -> ()) {
+    public func dailyForecast(cityId: Int, callback: (Result) -> ()) {
         call("/forecast/daily?id=\(cityId)", callback: callback);
     }
     
     // MARK: -
     // MARK: Retrieving forecast
     
-    public func forecast(cityName: String, callback: (NSError!, NSURLResponse!, NSDictionary!) -> ()) {
+    public func forecast(cityName: String, callback: (Result) -> ()) {
         call("/forecast?q=\(cityName)", callback: callback);
     }
     
-    public func forecast(coordinate: CLLocationCoordinate2D, callback: (NSError!, NSURLResponse!, NSDictionary!) -> ()) {
+    public func forecast(coordinate: CLLocationCoordinate2D, callback:(Result) -> ()) {
         call("/forecast?lat=\(coordinate.latitude)&lon=\(coordinate.longitude)", callback: callback);
     }
     
-    public func forecast(cityId: Int, callback: (NSError!, NSURLResponse!, NSDictionary!) ->()) {
+    public func forecast(cityId: Int, callback: (Result) ->()) {
         call("/forecast?id=\(cityId)", callback: callback);
     }
 
     // MARK: -
     // MARK: Retrieving city 
     
-    public func findCity(cityName: String, callback: (NSError!, NSURLResponse!, NSDictionary!) -> ()) {
+    public func findCity(cityName: String, callback: (Result) -> ()) {
         call("/find?q=\(cityName)", callback: callback);
     }
     
     
-    public func findCity(coordinate: CLLocationCoordinate2D, callback: (NSError!, NSURLResponse!, NSDictionary!) -> ()) {
+    public func findCity(coordinate: CLLocationCoordinate2D, callback: (Result) -> ()) {
         call("/find?lat=\(coordinate.latitude)&lon=\(coordinate.longitude)", callback: callback);
     }
     
     // MARK: -
     // MARK: Call the api
     
-    private func call(method: String, callback: (NSError!, NSURLResponse!, NSDictionary!) -> ()) {
+    private func call(method: String, callback: (Result) -> ()) {
         let url = Defines.basePath + apiVersion + method + "&APPID=\(apiKey)&lang=\(language)&units=\(temperatureFormat.toRaw())"
         let request = NSURLRequest(URL: NSURL(string: url))
         let currentQueue = NSOperationQueue.currentQueue();
@@ -125,7 +148,11 @@ public class Sweather {
             }
             
             currentQueue.addOperationWithBlock {
-                callback(error, response, dictionary)
+                var result = Result.Success(response, dictionary)
+                if error != nil {
+                    result = Result.Error(response, error)
+                }
+                callback(result)
             }
         }
     }
