@@ -26,7 +26,7 @@ public class Sweather {
         static let basePath = "http://api.openweathermap.org/data/"
     }
     
-    // MARK: --
+    // MARK: -
     // MARK: Initialization
     
     public convenience init(apiKey: String) {
@@ -49,7 +49,7 @@ public class Sweather {
         self.queue = NSOperationQueue()
     }
     
-    // MARK: --
+    // MARK: -
     // MARK: Retrieving current weather data
     
     public func currentWeather(cityName: String, callback: (NSError!, NSURLResponse!, NSDictionary!) -> ()) {
@@ -65,7 +65,7 @@ public class Sweather {
         call("/weather?id=\(cityId)", callback: callback);
     }
     
-    // MARK: --
+    // MARK: -
     // MARK: Retrieving daily forecast
     
     public func dailyForecast(cityName: String, callback: (NSError!, NSURLResponse!, NSDictionary!) -> ()) {
@@ -81,7 +81,7 @@ public class Sweather {
         call("/forecast/daily?id=\(cityId)", callback: callback);
     }
     
-    // MARK: --
+    // MARK: -
     // MARK: Retrieving forecast
     
     public func forecast(cityName: String, callback: (NSError!, NSURLResponse!, NSDictionary!) -> ()) {
@@ -95,8 +95,8 @@ public class Sweather {
     public func forecast(cityId: Int, callback: (NSError!, NSURLResponse!, NSDictionary!) ->()) {
         call("/forecast?id=\(cityId)", callback: callback);
     }
-    
-    // MARK: --
+
+    // MARK: -
     // MARK: Retrieving city 
     
     public func findCity(cityName: String, callback: (NSError!, NSURLResponse!, NSDictionary!) -> ()) {
@@ -108,7 +108,7 @@ public class Sweather {
         call("/find?lat=\(coordinate.latitude)&lon=\(coordinate.longitude)", callback: callback);
     }
     
-    // MARK: --
+    // MARK: -
     // MARK: Call the api
     
     private func call(method: String, callback: (NSError!, NSURLResponse!, NSDictionary!) -> ()) {
@@ -116,7 +116,7 @@ public class Sweather {
         let request = NSURLRequest(URL: NSURL(string: url))
         let currentQueue = NSOperationQueue.currentQueue();
         
-        NSURLConnection.sendAsynchronousRequest(request, queue: queue) { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+        NSURLConnection.sendAsynchronousRequest(request, queue: queue) { (response: NSURLResponse!, data: NSData!, error: NSError?) -> Void in
             var error: NSError? = error
             var dictionary: NSDictionary?
             

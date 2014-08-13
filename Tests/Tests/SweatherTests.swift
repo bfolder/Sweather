@@ -30,7 +30,7 @@ class SweatherTests: XCTestCase {
         XCTAssertEqual(client.apiVersion, "2.5")
     }
     
-    // MARK: ---
+    // MARK: -
     // MARK: Current weather
     
     func testCurrentWeatherByName() {
