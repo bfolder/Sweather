@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "60048F37199A07E400DE5EC6"
-               BuildableName = "Tests.app"
+               BlueprintIdentifier = "60048F49199A07E400DE5EC6"
+               BuildableName = "Tests.xctest"
                BlueprintName = "Tests"
                ReferencedContainer = "container:Tests.xcodeproj">
             </BuildableReference>
@@ -56,8 +56,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "60048F37199A07E400DE5EC6"
-            BuildableName = "Tests.app"
+            BlueprintIdentifier = "60048F49199A07E400DE5EC6"
+            BuildableName = "Tests.xctest"
             BlueprintName = "Tests"
             ReferencedContainer = "container:Tests.xcodeproj">
          </BuildableReference>
@@ -75,8 +75,8 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "60048F37199A07E400DE5EC6"
-            BuildableName = "Tests.app"
+            BlueprintIdentifier = "60048F49199A07E400DE5EC6"
+            BuildableName = "Tests.xctest"
             BlueprintName = "Tests"
             ReferencedContainer = "container:Tests.xcodeproj">
          </BuildableReference>
@@ -93,8 +93,8 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "60048F37199A07E400DE5EC6"
-            BuildableName = "Tests.app"
+            BlueprintIdentifier = "60048F49199A07E400DE5EC6"
+            BuildableName = "Tests.xctest"
             BlueprintName = "Tests"
             ReferencedContainer = "container:Tests.xcodeproj">
          </BuildableReference>

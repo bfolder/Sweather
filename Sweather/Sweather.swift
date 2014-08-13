@@ -79,7 +79,6 @@ public class Sweather {
     
     public func dailyForecast(cityId: Int, callback: (NSError!, NSURLResponse!, NSDictionary!) -> ()) {
         call("/forecast/daily?id=\(cityId)", callback: callback);
-        
     }
     
     // MARK: --
@@ -118,11 +117,11 @@ public class Sweather {
         let currentQueue = NSOperationQueue.currentQueue();
         
         NSURLConnection.sendAsynchronousRequest(request, queue: queue) { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
-            var anError: NSError? = error
+            var error: NSError? = error
             var dictionary: NSDictionary?
             
-            if let sData = data {
-               dictionary = NSJSONSerialization.JSONObjectWithData(sData, options: NSJSONReadingOptions.MutableContainers, error: &anError) as? NSDictionary;
+            if let data = data {
+               dictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &error) as? NSDictionary;
             }
             
             currentQueue.addOperationWithBlock {
