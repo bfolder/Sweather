@@ -2,7 +2,16 @@
 Sweather is a Swift wrapper around the openweathermap api.
 For detailed information about different api calls have a look at the official page [here](http://openweathermap.org).
 
-The example shows how to use the Sweather class in your own projects.
+The example project shows how to use the Sweather class in your own code.
+
+You can call it like that:
+
+```
+let client = Sweather(apiKey: "your_key")
+client.currentWeather("Berlin") { result in
+	// Do something here
+}
+```
 
 ---
 ### Requirements

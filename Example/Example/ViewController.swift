@@ -30,7 +30,7 @@ class ViewController: UIViewController, UITextFieldDelegate  {
             textView?.text = ""
             textField.resignFirstResponder()
             activityIndicatorView?.hidden = false;
-            client?.currentWeather(textField.text) { (result) -> () in
+            client?.currentWeather(textField.text) { result in
                 self.activityIndicatorView?.hidden = true;
                 switch result {
                 case .Error(let response, let error):
