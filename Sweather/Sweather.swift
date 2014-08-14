@@ -36,6 +36,15 @@ public class Sweather {
                 return response
             }
         }
+        
+        public func error() -> NSError? {
+            switch self {
+            case .Success(let response, let dictionary):
+                return nil
+            case .Error(let response, let error):
+                return error
+            }
+        }
     }
     
     public var apiKey: String
