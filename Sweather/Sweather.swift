@@ -144,7 +144,7 @@ public class Sweather {
             var dictionary: NSDictionary?
             
             if let data = data {
-               dictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &error) as? NSDictionary;
+               dictionary = NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers, error: &error) as? NSDictionary;
             }
             
             currentQueue.addOperationWithBlock {
