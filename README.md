@@ -6,7 +6,7 @@ The example project shows how to use the Sweather class in your own code.
 
 You can call it like that:
 
-```
+```swift
 let client = Sweather(apiKey: "your_key")
 client.currentWeather("Berlin") { result in
 	// Do something here
