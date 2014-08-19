@@ -155,8 +155,7 @@ public class Sweather {
             if let data = data {
                dictionary = NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers, error: &error) as? NSDictionary;
             }
-            
-            currentQueue.addOperationWithBlock {
+            currentQueue?.addOperationWithBlock {
                 var result = Result.Success(response, dictionary)
                 if error != nil {
                     result = Result.Error(response, error)
