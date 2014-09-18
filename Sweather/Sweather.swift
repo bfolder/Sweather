@@ -54,7 +54,7 @@ public class Sweather {
     
     private var queue: NSOperationQueue;
     
-    private struct Defines {
+    private struct Const {
         static let basePath = "http://api.openweathermap.org/data/"
     }
     
@@ -144,7 +144,7 @@ public class Sweather {
     // MARK: Call the api
     
     private func call(method: String, callback: (Result) -> ()) {
-        let url = Defines.basePath + apiVersion + method + "&APPID=\(apiKey)&lang=\(language)&units=\(temperatureFormat.toRaw())"
+        let url = Const.basePath + apiVersion + method + "&APPID=\(apiKey)&lang=\(language)&units=\(temperatureFormat.toRaw())"
         let request = NSURLRequest(URL: NSURL(string: url))
         let currentQueue = NSOperationQueue.currentQueue();
         

@@ -36,7 +36,7 @@ class SweatherTests: XCTestCase {
     func testCurrentWeatherByName() {
         let expectation = expectationWithDescription("currentWeatherByName")
         client.currentWeather("Berlin") { result in
-            let url = result.response()?.URL.absoluteString
+            let url = result.response()?.URL!.absoluteString
             let data = result.data()
             XCTAssertNotNil(url)
             XCTAssertEqual("http://api.openweathermap.org/data/2.5/weather?q=Berlin&APPID=1234&lang=sp&units=metric", url!)
@@ -50,7 +50,7 @@ class SweatherTests: XCTestCase {
     func testCurrentWeatherById() {
         let expectation = expectationWithDescription("currentWeatherById")
         client.currentWeather(2950159) { result in
-            let url = result.response()?.URL.absoluteString
+            let url = result.response()?.URL!.absoluteString
             let data = result.data()!
             XCTAssertNotNil(url)
             XCTAssertEqual("http://api.openweathermap.org/data/2.5/weather?id=2950159&APPID=1234&lang=sp&units=metric", url!)
@@ -64,7 +64,7 @@ class SweatherTests: XCTestCase {
     func testCurrentWeatherByCoordinate() {
         let expectation = expectationWithDescription("currentWeatherById")
         client.currentWeather(CLLocationCoordinate2D(latitude: 52, longitude: 13)) { result in
-            let url = result.response()?.URL.absoluteString
+            let url = result.response()?.URL!.absoluteString
             let data = result.data()!
             XCTAssertNotNil(url)
             XCTAssertEqual("http://api.openweathermap.org/data/2.5/weather?lat=52.0&lon=13.0&APPID=1234&lang=sp&units=metric", url!)
@@ -80,7 +80,7 @@ class SweatherTests: XCTestCase {
     func testDailyForecastByName() {
         let expectation = expectationWithDescription("dailyForecastByName")
         client.dailyForecast("Berlin") { result in
-            let url = result.response()?.URL.absoluteString
+            let url = result.response()?.URL!.absoluteString
             let data = result.data()! as Dictionary<String, AnyObject>
             let cityDict = data["city"]! as Dictionary<String,AnyObject>
             XCTAssertNotNil(url)
@@ -95,7 +95,7 @@ class SweatherTests: XCTestCase {
     func testDailyForecastById() {
         let expectation = expectationWithDescription("dailyForecastById")
         client.dailyForecast(2950159) { result in
-            let url = result.response()?.URL.absoluteString
+            let url = result.response()?.URL!.absoluteString
             let data = result.data()! as Dictionary<String, AnyObject>
             let cityDict = data["city"]! as Dictionary<String,AnyObject>
             XCTAssertNotNil(url)
@@ -110,7 +110,7 @@ class SweatherTests: XCTestCase {
     func testDailyForecastByCoordinate() {
         let expectation = expectationWithDescription("dailyForecastByCoordinate")
         client.dailyForecast(CLLocationCoordinate2D(latitude: 52, longitude: 13)) { result in
-            let url = result.response()?.URL.absoluteString
+            let url = result.response()?.URL!.absoluteString
             let data = result.data()! as Dictionary<String, AnyObject>
             let cityDict = data["city"]! as Dictionary<String,AnyObject>
             XCTAssertNotNil(url)
@@ -127,7 +127,7 @@ class SweatherTests: XCTestCase {
     func testForecastByName() {
         let expectation = expectationWithDescription("dailyForecastByName")
         client.forecast("Berlin") { result in
-            let url = result.response()?.URL.absoluteString
+            let url = result.response()?.URL!.absoluteString
             let data = result.data()! as Dictionary<String, AnyObject>
             let cityDict = data["city"]! as Dictionary<String,AnyObject>
             XCTAssertNotNil(url)
@@ -142,7 +142,7 @@ class SweatherTests: XCTestCase {
     func testForecastById() {
         let expectation = expectationWithDescription("dailyForecastById")
         client.forecast(2950159) { result in
-            let url = result.response()?.URL.absoluteString
+            let url = result.response()?.URL!.absoluteString
             let data = result.data()! as Dictionary<String, AnyObject>
             let cityDict = data["city"]! as Dictionary<String,AnyObject>
             XCTAssertNotNil(url)
@@ -157,7 +157,7 @@ class SweatherTests: XCTestCase {
     func testForecastByCoordinate() {
         let expectation = expectationWithDescription("dailyForecastByCoordinate")
         client.forecast(CLLocationCoordinate2D(latitude: 52, longitude: 13)) { result in
-            let url = result.response()?.URL.absoluteString
+            let url = result.response()?.URL!.absoluteString
             let data = result.data()! as Dictionary<String, AnyObject>
             let cityDict = data["city"]! as Dictionary<String,AnyObject>
             XCTAssertNotNil(url)
@@ -174,7 +174,7 @@ class SweatherTests: XCTestCase {
     func testFindCityByName() {
         let expectation = expectationWithDescription("findCityByName")
         client.findCity("Berlin") { result in
-            let url = result.response()?.URL.absoluteString
+            let url = result.response()?.URL!.absoluteString
             let data = result.data()
             XCTAssertNotNil(url)
             XCTAssertEqual("http://api.openweathermap.org/data/2.5/find?q=Berlin&APPID=1234&lang=sp&units=metric", url!);
@@ -187,7 +187,7 @@ class SweatherTests: XCTestCase {
     func testFindCityByCoordinate() {
         let expectation = expectationWithDescription("findCityByCoordinate")
         client.findCity(CLLocationCoordinate2D(latitude: 52.0, longitude: 13.0)) { result in
-            let url = result.response()?.URL.absoluteString
+            let url = result.response()?.URL!.absoluteString
             let data = result.data()
             XCTAssertNotNil(url)
             XCTAssertEqual("http://api.openweathermap.org/data/2.5/find?lat=52.0&lon=13.0&APPID=1234&lang=sp&units=metric", url!);
