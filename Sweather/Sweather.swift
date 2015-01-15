@@ -144,8 +144,8 @@ public class Sweather {
     // MARK: Call the api
     
     private func call(method: String, callback: (Result) -> ()) {
-        let url = Const.basePath + apiVersion + method + "&APPID=\(apiKey)&lang=\(language)&units=\(temperatureFormat.toRaw())"
-        let request = NSURLRequest(URL: NSURL(string: url))
+        let url = Const.basePath + apiVersion + method + "&APPID=\(apiKey)&lang=\(language)&units=\(temperatureFormat.rawValue)"
+        let request = NSURLRequest(URL: NSURL(string: url)!)
         let currentQueue = NSOperationQueue.currentQueue();
         
         NSURLConnection.sendAsynchronousRequest(request, queue: queue) { (response: NSURLResponse!, data: NSData!, error: NSError?) -> Void in
