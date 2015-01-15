@@ -1,4 +1,6 @@
 ## Readme
+[![Build Status](https://travis-ci.org/bfolder/Sweather.svg?branch=master)](https://travis-ci.org/bfolder/Sweather)
+
 Sweather is a Swift wrapper around the openweathermap api.
 For detailed information about different api calls have a look at the official page [here](http://openweathermap.org).
 
