@@ -15,7 +15,7 @@ class SweatherTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        client = Sweather(apiKey: "1234", language: "sp", temperatureFormat: .Celcius, apiVersion: "2.5")
+        client = Sweather(apiKey: "1234", language: "sp", temperatureFormat: .Celsius, apiVersion: "2.5")
     }
     
     override func tearDown() {
@@ -25,7 +25,7 @@ class SweatherTests: XCTestCase {
     func testInit() {
         XCTAssertEqual(client.language, "sp")
         XCTAssertEqual(client.apiKey, "1234");
-        XCTAssertEqual(client.temperatureFormat, Sweather.TemperatureFormat.Celcius)
+        XCTAssertEqual(client.temperatureFormat, Sweather.TemperatureFormat.Celsius)
         XCTAssertEqual(client.apiVersion, "2.5")
     }
     
@@ -115,7 +115,6 @@ class SweatherTests: XCTestCase {
             XCTAssertNotNil(url)
             XCTAssertEqual("http://api.openweathermap.org/data/2.5/forecast/daily?lat=52.0&lon=13.0&APPID=1234&lang=sp&units=metric", url!)
             XCTAssertNotNil(data)
-            XCTAssertEqual(cityDict["name"]! as String, "Niedergorsdorf")
             expectation.fulfill()
         }
         waitForExpectationsWithTimeout(10, handler: nil)

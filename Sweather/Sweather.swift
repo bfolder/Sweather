@@ -11,7 +11,7 @@ import CoreLocation
 
 public class Sweather {
     public enum TemperatureFormat: String {
-        case Celcius = "metric"
+        case Celsius = "metric"
         case Fahrenheit = "imperial"
     }
     
@@ -134,7 +134,6 @@ public class Sweather {
     public func findCity(cityName: String, callback: (Result) -> ()) {
         call("/find?q=\(cityName)", callback: callback);
     }
-    
     
     public func findCity(coordinate: CLLocationCoordinate2D, callback: (Result) -> ()) {
         call("/find?lat=\(coordinate.latitude)&lon=\(coordinate.longitude)", callback: callback);
