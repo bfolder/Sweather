@@ -115,6 +115,7 @@
 		60048F05199A078C00DE5EC6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = boxedfolder.com;
 				TargetAttributes = {

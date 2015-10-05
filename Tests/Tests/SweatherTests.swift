@@ -40,7 +40,7 @@ class SweatherTests: XCTestCase {
             XCTAssertNotNil(url)
             XCTAssertEqual("http://api.openweathermap.org/data/2.5/weather?q=Berlin&APPID=1234&lang=sp&units=metric", url!)
             XCTAssertNotNil(data)
-            XCTAssertEqual(data!["name"] as String, "Berlin")
+            XCTAssertEqual(data!["name"] as? String, "Berlin")
             expectation.fulfill()
         }
         waitForExpectationsWithTimeout(10, handler: nil)
@@ -54,7 +54,7 @@ class SweatherTests: XCTestCase {
             XCTAssertNotNil(url)
             XCTAssertEqual("http://api.openweathermap.org/data/2.5/weather?id=2950159&APPID=1234&lang=sp&units=metric", url!)
             XCTAssertNotNil(data)
-            XCTAssertEqual(data["name"] as String, "Berlin")
+            XCTAssertEqual(data["name"] as? String, "Berlin")
             expectation.fulfill()
         }
         waitForExpectationsWithTimeout(10, handler: nil)
@@ -68,7 +68,7 @@ class SweatherTests: XCTestCase {
             XCTAssertNotNil(url)
             XCTAssertEqual("http://api.openweathermap.org/data/2.5/weather?lat=52.0&lon=13.0&APPID=1234&lang=sp&units=metric", url!)
             XCTAssertNotNil(data)
-            XCTAssertNotNil(data["name"] as String)
+            XCTAssertNotNil(data["name"] as! String)
             expectation.fulfill()
         }
         waitForExpectationsWithTimeout(10, handler: nil)
@@ -80,12 +80,12 @@ class SweatherTests: XCTestCase {
         let expectation = expectationWithDescription("dailyForecastByName")
         client.dailyForecast("Berlin") { result in
             let url = result.response()?.URL!.absoluteString
-            let data = result.data()! as Dictionary<String, AnyObject>
-            let cityDict = data["city"]! as Dictionary<String,AnyObject>
+            let data = result.data()! as! Dictionary<String, AnyObject>
+            let cityDict = data["city"]! as! Dictionary<String,AnyObject>
             XCTAssertNotNil(url)
             XCTAssertEqual("http://api.openweathermap.org/data/2.5/forecast/daily?q=Berlin&APPID=1234&lang=sp&units=metric", url!);
             XCTAssertNotNil(data)
-            XCTAssertEqual(cityDict["name"]! as String, "Berlin")
+            XCTAssertEqual(cityDict["name"] as? String, "Berlin")
             expectation.fulfill()
         }
         waitForExpectationsWithTimeout(10, handler: nil)
@@ -95,12 +95,12 @@ class SweatherTests: XCTestCase {
         let expectation = expectationWithDescription("dailyForecastById")
         client.dailyForecast(2950159) { result in
             let url = result.response()?.URL!.absoluteString
-            let data = result.data()! as Dictionary<String, AnyObject>
-            let cityDict = data["city"]! as Dictionary<String,AnyObject>
+            let data = result.data()! as! Dictionary<String, AnyObject>
+            let cityDict = data["city"]! as! Dictionary<String,AnyObject>
             XCTAssertNotNil(url)
             XCTAssertEqual("http://api.openweathermap.org/data/2.5/forecast/daily?id=2950159&APPID=1234&lang=sp&units=metric", url!);
             XCTAssertNotNil(data)
-            XCTAssertEqual(cityDict["name"]! as String, "Berlin")
+            XCTAssertEqual(cityDict["name"] as? String, "Berlin")
             expectation.fulfill()
         }
         waitForExpectationsWithTimeout(10, handler: nil)
@@ -110,11 +110,12 @@ class SweatherTests: XCTestCase {
         let expectation = expectationWithDescription("dailyForecastByCoordinate")
         client.dailyForecast(CLLocationCoordinate2D(latitude: 52, longitude: 13)) { result in
             let url = result.response()?.URL!.absoluteString
-            let data = result.data()! as Dictionary<String, AnyObject>
-            let cityDict = data["city"]! as Dictionary<String,AnyObject>
+            let data = result.data()! as! Dictionary<String, AnyObject>
+            let cityDict = data["city"] as? Dictionary<String,AnyObject>
             XCTAssertNotNil(url)
             XCTAssertEqual("http://api.openweathermap.org/data/2.5/forecast/daily?lat=52.0&lon=13.0&APPID=1234&lang=sp&units=metric", url!)
             XCTAssertNotNil(data)
+            XCTAssertNotNil(cityDict)
             expectation.fulfill()
         }
         waitForExpectationsWithTimeout(10, handler: nil)
@@ -126,12 +127,12 @@ class SweatherTests: XCTestCase {
         let expectation = expectationWithDescription("dailyForecastByName")
         client.forecast("Berlin") { result in
             let url = result.response()?.URL!.absoluteString
-            let data = result.data()! as Dictionary<String, AnyObject>
-            let cityDict = data["city"]! as Dictionary<String,AnyObject>
+            let data = result.data()! as! Dictionary<String, AnyObject>
+            let cityDict = data["city"]! as! Dictionary<String,AnyObject>
             XCTAssertNotNil(url)
             XCTAssertEqual("http://api.openweathermap.org/data/2.5/forecast?q=Berlin&APPID=1234&lang=sp&units=metric", url!)
             XCTAssertNotNil(data)
-            XCTAssertEqual(cityDict["name"]! as String, "Berlin")
+            XCTAssertEqual(cityDict["name"] as? String, "Berlin")
             expectation.fulfill()
         }
         waitForExpectationsWithTimeout(10, handler: nil)
@@ -141,12 +142,12 @@ class SweatherTests: XCTestCase {
         let expectation = expectationWithDescription("dailyForecastById")
         client.forecast(2950159) { result in
             let url = result.response()?.URL!.absoluteString
-            let data = result.data()! as Dictionary<String, AnyObject>
-            let cityDict = data["city"]! as Dictionary<String,AnyObject>
+            let data = result.data()! as! Dictionary<String, AnyObject>
+            let cityDict = data["city"]! as! Dictionary<String,AnyObject>
             XCTAssertNotNil(url)
             XCTAssertEqual("http://api.openweathermap.org/data/2.5/forecast?id=2950159&APPID=1234&lang=sp&units=metric", url!);
             XCTAssertNotNil(data)
-            XCTAssertEqual(cityDict["name"]! as String, "Berlin")
+            XCTAssertEqual(cityDict["name"] as? String, "Berlin")
             expectation.fulfill()
         }
         waitForExpectationsWithTimeout(10, handler: nil)
@@ -156,12 +157,12 @@ class SweatherTests: XCTestCase {
         let expectation = expectationWithDescription("dailyForecastByCoordinate")
         client.forecast(CLLocationCoordinate2D(latitude: 52, longitude: 13)) { result in
             let url = result.response()?.URL!.absoluteString
-            let data = result.data()! as Dictionary<String, AnyObject>
-            let cityDict = data["city"]! as Dictionary<String,AnyObject>
+            let data = result.data()! as! Dictionary<String, AnyObject>
+            let cityDict = data["city"]! as! Dictionary<String,AnyObject>
             XCTAssertNotNil(url)
             XCTAssertEqual("http://api.openweathermap.org/data/2.5/forecast?lat=52.0&lon=13.0&APPID=1234&lang=sp&units=metric", url!);
             XCTAssertNotNil(data)
-            XCTAssertNotNil(cityDict["name"]! as String)
+            XCTAssertNotNil(cityDict["name"] as? String)
             expectation.fulfill()
         }
         waitForExpectationsWithTimeout(10, handler: nil)

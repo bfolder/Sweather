@@ -21,27 +21,27 @@ public class Sweather {
         
         public func data() -> NSDictionary? {
             switch self {
-            case .Success(let response, let dictionary):
+            case .Success(_, let dictionary):
                 return dictionary
-            case .Error(let response, let error):
+            case .Error(_, _):
                 return nil
             }
         }
         
         public func response() -> NSURLResponse? {
             switch self {
-            case .Success(let response, let dictionary):
+            case .Success(let response, _):
                 return response
-            case .Error(let response, let error):
+            case .Error(let response, _):
                 return response
             }
         }
         
         public func error() -> NSError? {
             switch self {
-            case .Success(let response, let dictionary):
+            case .Success(_, _):
                 return nil
-            case .Error(let response, let error):
+            case .Error(_, let error):
                 return error
             }
         }
@@ -147,12 +147,16 @@ public class Sweather {
         let request = NSURLRequest(URL: NSURL(string: url)!)
         let currentQueue = NSOperationQueue.currentQueue();
         
-        NSURLConnection.sendAsynchronousRequest(request, queue: queue) { (response: NSURLResponse!, data: NSData!, error: NSError?) -> Void in
+        NSURLConnection.sendAsynchronousRequest(request, queue: queue) { (response: NSURLResponse?, data: NSData?, error: NSError?) -> Void in
             var error: NSError? = error
             var dictionary: NSDictionary?
             
             if let data = data {
-               dictionary = NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers, error: &error) as? NSDictionary;
+                do {
+                    dictionary = try NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers) as? NSDictionary;
+                } catch let e as NSError {
+                    error = e;
+                }
             }
             currentQueue?.addOperationWithBlock {
                 var result = Result.Success(response, dictionary)
