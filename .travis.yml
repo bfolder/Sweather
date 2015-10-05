@@ -2,3 +2,4 @@ language: objective-c
 xcode_project: Tests/Tests.xcodeproj
 xcode_scheme: Tests
 xcode_sdk: iphonesimulator
+osx_image: xcode7
