@@ -161,6 +161,7 @@ public class Sweather {
             var dictionary: NSDictionary?
             
             if let data = data {
+                print("Data\(NSString(data: data, encoding: NSUTF8StringEncoding)))");
                 do {
                     dictionary = try NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers) as? NSDictionary;
                 } catch let e as NSError {
