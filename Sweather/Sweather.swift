@@ -8,6 +8,19 @@
 import Foundation
 import CoreLocation
 
+extension String {
+    func replace(string:String, replacement:String) -> String {
+        return self.stringByReplacingOccurrencesOfString(string,
+            withString: replacement,
+            options: NSStringCompareOptions.LiteralSearch,
+            range: nil)
+    }
+    
+    func replaceWhitespace() -> String {
+        return self.replace(" ", replacement: "+")
+    }
+}
+
 public class Sweather {
     public enum TemperatureFormat: String {
         case Celsius = "metric"
@@ -84,7 +97,7 @@ public class Sweather {
     // MARK: Retrieving current weather data
     
     public func currentWeather(cityName: String, callback: (Result) -> ()) {
-        call("/weather?q=\(cityName)", callback: callback);
+        call("/weather?q=\(cityName.replaceWhitespace())", callback: callback);
     }
     
     public func currentWeather(coordinate: CLLocationCoordinate2D, callback: (Result) -> ()) {
@@ -100,7 +113,7 @@ public class Sweather {
     // MARK: Retrieving daily forecast
     
     public func dailyForecast(cityName: String, callback: (Result) -> ()) {
-        call("/forecast/daily?q=\(cityName)", callback: callback);
+        call("/forecast/daily?q=\(cityName.replaceWhitespace())", callback: callback);
     }
     
     public func dailyForecast(coordinate: CLLocationCoordinate2D, callback: (Result) -> ()) {
@@ -116,7 +129,7 @@ public class Sweather {
     // MARK: Retrieving forecast
     
     public func forecast(cityName: String, callback: (Result) -> ()) {
-        call("/forecast?q=\(cityName)", callback: callback);
+        call("/forecast?q=\(cityName.replaceWhitespace())", callback: callback);
     }
     
     public func forecast(coordinate: CLLocationCoordinate2D, callback:(Result) -> ()) {
@@ -131,7 +144,7 @@ public class Sweather {
     // MARK: Retrieving city 
     
     public func findCity(cityName: String, callback: (Result) -> ()) {
-        call("/find?q=\(cityName)", callback: callback);
+        call("/find?q=\(cityName.replaceWhitespace())", callback: callback);
     }
     
     public func findCity(coordinate: CLLocationCoordinate2D, callback: (Result) -> ()) {

@@ -17,7 +17,7 @@ class ViewController: UIViewController, UITextFieldDelegate  {
                             
     override func viewDidLoad() {
         super.viewDidLoad()
-        client = Sweather(apiKey: "your_key")
+        client = Sweather(apiKey: "ea42045886608526507915df6b33b290")
         activityIndicatorView?.hidden = true
     }
 

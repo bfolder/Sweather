@@ -15,7 +15,7 @@ class SweatherTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        client = Sweather(apiKey: "1234", language: "sp", temperatureFormat: .Celsius, apiVersion: "2.5")
+        client = Sweather(apiKey: "ea42045886608526507915df6b33b290", language: "sp", temperatureFormat: .Celsius, apiVersion: "2.5")
     }
     
     override func tearDown() {
@@ -24,7 +24,7 @@ class SweatherTests: XCTestCase {
     
     func testInit() {
         XCTAssertEqual(client.language, "sp")
-        XCTAssertEqual(client.apiKey, "1234");
+        XCTAssertEqual(client.apiKey, "ea42045886608526507915df6b33b290");
         XCTAssertEqual(client.temperatureFormat, Sweather.TemperatureFormat.Celsius)
         XCTAssertEqual(client.apiVersion, "2.5")
     }
@@ -38,7 +38,7 @@ class SweatherTests: XCTestCase {
             let url = result.response()?.URL!.absoluteString
             let data = result.data()
             XCTAssertNotNil(url)
-            XCTAssertEqual("http://api.openweathermap.org/data/2.5/weather?q=Berlin&APPID=1234&lang=sp&units=metric", url!)
+            XCTAssertEqual("http://api.openweathermap.org/data/2.5/weather?q=Berlin&APPID=ea42045886608526507915df6b33b290&lang=sp&units=metric", url!)
             XCTAssertNotNil(data)
             XCTAssertEqual(data!["name"] as? String, "Berlin")
             expectation.fulfill()
@@ -52,7 +52,7 @@ class SweatherTests: XCTestCase {
             let url = result.response()?.URL!.absoluteString
             let data = result.data()!
             XCTAssertNotNil(url)
-            XCTAssertEqual("http://api.openweathermap.org/data/2.5/weather?id=2950159&APPID=1234&lang=sp&units=metric", url!)
+            XCTAssertEqual("http://api.openweathermap.org/data/2.5/weather?id=2950159&APPID=ea42045886608526507915df6b33b290&lang=sp&units=metric", url!)
             XCTAssertNotNil(data)
             XCTAssertEqual(data["name"] as? String, "Berlin")
             expectation.fulfill()
@@ -66,7 +66,7 @@ class SweatherTests: XCTestCase {
             let url = result.response()?.URL!.absoluteString
             let data = result.data()!
             XCTAssertNotNil(url)
-            XCTAssertEqual("http://api.openweathermap.org/data/2.5/weather?lat=52.0&lon=13.0&APPID=1234&lang=sp&units=metric", url!)
+            XCTAssertEqual("http://api.openweathermap.org/data/2.5/weather?lat=52.0&lon=13.0&APPID=ea42045886608526507915df6b33b290&lang=sp&units=metric", url!)
             XCTAssertNotNil(data)
             XCTAssertNotNil(data["name"] as! String)
             expectation.fulfill()
@@ -83,7 +83,7 @@ class SweatherTests: XCTestCase {
             let data = result.data()! as! Dictionary<String, AnyObject>
             let cityDict = data["city"]! as! Dictionary<String,AnyObject>
             XCTAssertNotNil(url)
-            XCTAssertEqual("http://api.openweathermap.org/data/2.5/forecast/daily?q=Berlin&APPID=1234&lang=sp&units=metric", url!);
+            XCTAssertEqual("http://api.openweathermap.org/data/2.5/forecast/daily?q=Berlin&APPID=ea42045886608526507915df6b33b290&lang=sp&units=metric", url!);
             XCTAssertNotNil(data)
             XCTAssertEqual(cityDict["name"] as? String, "Berlin")
             expectation.fulfill()
@@ -98,7 +98,7 @@ class SweatherTests: XCTestCase {
             let data = result.data()! as! Dictionary<String, AnyObject>
             let cityDict = data["city"]! as! Dictionary<String,AnyObject>
             XCTAssertNotNil(url)
-            XCTAssertEqual("http://api.openweathermap.org/data/2.5/forecast/daily?id=2950159&APPID=1234&lang=sp&units=metric", url!);
+            XCTAssertEqual("http://api.openweathermap.org/data/2.5/forecast/daily?id=2950159&APPID=ea42045886608526507915df6b33b290&lang=sp&units=metric", url!);
             XCTAssertNotNil(data)
             XCTAssertEqual(cityDict["name"] as? String, "Berlin")
             expectation.fulfill()
@@ -113,7 +113,7 @@ class SweatherTests: XCTestCase {
             let data = result.data()! as! Dictionary<String, AnyObject>
             let cityDict = data["city"] as? Dictionary<String,AnyObject>
             XCTAssertNotNil(url)
-            XCTAssertEqual("http://api.openweathermap.org/data/2.5/forecast/daily?lat=52.0&lon=13.0&APPID=1234&lang=sp&units=metric", url!)
+            XCTAssertEqual("http://api.openweathermap.org/data/2.5/forecast/daily?lat=52.0&lon=13.0&APPID=ea42045886608526507915df6b33b290&lang=sp&units=metric", url!)
             XCTAssertNotNil(data)
             XCTAssertNotNil(cityDict)
             expectation.fulfill()
@@ -130,7 +130,7 @@ class SweatherTests: XCTestCase {
             let data = result.data()! as! Dictionary<String, AnyObject>
             let cityDict = data["city"]! as! Dictionary<String,AnyObject>
             XCTAssertNotNil(url)
-            XCTAssertEqual("http://api.openweathermap.org/data/2.5/forecast?q=Berlin&APPID=1234&lang=sp&units=metric", url!)
+            XCTAssertEqual("http://api.openweathermap.org/data/2.5/forecast?q=Berlin&APPID=ea42045886608526507915df6b33b290&lang=sp&units=metric", url!)
             XCTAssertNotNil(data)
             XCTAssertEqual(cityDict["name"] as? String, "Berlin")
             expectation.fulfill()
@@ -145,7 +145,7 @@ class SweatherTests: XCTestCase {
             let data = result.data()! as! Dictionary<String, AnyObject>
             let cityDict = data["city"]! as! Dictionary<String,AnyObject>
             XCTAssertNotNil(url)
-            XCTAssertEqual("http://api.openweathermap.org/data/2.5/forecast?id=2950159&APPID=1234&lang=sp&units=metric", url!);
+            XCTAssertEqual("http://api.openweathermap.org/data/2.5/forecast?id=2950159&APPID=ea42045886608526507915df6b33b290&lang=sp&units=metric", url!);
             XCTAssertNotNil(data)
             XCTAssertEqual(cityDict["name"] as? String, "Berlin")
             expectation.fulfill()
@@ -160,7 +160,7 @@ class SweatherTests: XCTestCase {
             let data = result.data()! as! Dictionary<String, AnyObject>
             let cityDict = data["city"]! as! Dictionary<String,AnyObject>
             XCTAssertNotNil(url)
-            XCTAssertEqual("http://api.openweathermap.org/data/2.5/forecast?lat=52.0&lon=13.0&APPID=1234&lang=sp&units=metric", url!);
+            XCTAssertEqual("http://api.openweathermap.org/data/2.5/forecast?lat=52.0&lon=13.0&APPID=ea42045886608526507915df6b33b290&lang=sp&units=metric", url!);
             XCTAssertNotNil(data)
             XCTAssertNotNil(cityDict["name"] as? String)
             expectation.fulfill()
@@ -176,7 +176,7 @@ class SweatherTests: XCTestCase {
             let url = result.response()?.URL!.absoluteString
             let data = result.data()
             XCTAssertNotNil(url)
-            XCTAssertEqual("http://api.openweathermap.org/data/2.5/find?q=Berlin&APPID=1234&lang=sp&units=metric", url!);
+            XCTAssertEqual("http://api.openweathermap.org/data/2.5/find?q=Berlin&APPID=ea42045886608526507915df6b33b290&lang=sp&units=metric", url!);
             XCTAssertNotNil(data)
             expectation.fulfill()
         }
@@ -189,7 +189,7 @@ class SweatherTests: XCTestCase {
             let url = result.response()?.URL!.absoluteString
             let data = result.data()
             XCTAssertNotNil(url)
-            XCTAssertEqual("http://api.openweathermap.org/data/2.5/find?lat=52.0&lon=13.0&APPID=1234&lang=sp&units=metric", url!);
+            XCTAssertEqual("http://api.openweathermap.org/data/2.5/find?lat=52.0&lon=13.0&APPID=ea42045886608526507915df6b33b290&lang=sp&units=metric", url!);
             XCTAssertNotNil(data)
             expectation.fulfill()
         }
