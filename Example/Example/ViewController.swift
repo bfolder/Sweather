@@ -29,9 +29,9 @@ class ViewController: UIViewController, UITextFieldDelegate  {
         if !textField.text!.isEmpty {
             textView?.text = ""
             textField.resignFirstResponder()
-            activityIndicatorView?.hidden = false;
+            activityIndicatorView?.hidden = false
             client?.currentWeather(textField.text!) { result in
-                self.activityIndicatorView?.hidden = true;
+                self.activityIndicatorView?.hidden = true
                 switch result {
                 case .Error(_, let error):
                     self.textView?.text = "Some error occured. Try again."
@@ -40,8 +40,8 @@ class ViewController: UIViewController, UITextFieldDelegate  {
                     self.textView?.text = "Received data: \(dictionary)"
                     
                     // Get temperature for city this way
-                    let city = dictionary["name"] as? String;
-                    let temperature = dictionary["main"]!["temp"] as! Int;
+                    let city = dictionary["name"] as? String
+                    let temperature = dictionary["main"]!["temp"] as! Int
                     print("City: \(city) Temperature: \(temperature)")
                 }
             }

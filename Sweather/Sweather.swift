@@ -64,7 +64,7 @@ public class Sweather {
     public var language: String
     public var temperatureFormat: TemperatureFormat
     
-    private var queue: NSOperationQueue;
+    private var queue: NSOperationQueue
     
     private struct Const {
         static let basePath = "http://api.openweathermap.org/data/"
@@ -97,58 +97,58 @@ public class Sweather {
     // MARK: Retrieving current weather data
     
     public func currentWeather(cityName: String, callback: (Result) -> ()) {
-        call("/weather?q=\(cityName.replaceWhitespace())", callback: callback);
+        call("/weather?q=\(cityName.replaceWhitespace())", callback: callback)
     }
     
     public func currentWeather(coordinate: CLLocationCoordinate2D, callback: (Result) -> ()) {
         let coordinateString = "lat=\(coordinate.latitude)&lon=\(coordinate.longitude)"
-        call("/weather?\(coordinateString)", callback: callback);
+        call("/weather?\(coordinateString)", callback: callback)
     }
     
     public func currentWeather(cityId: Int, callback: (Result) -> ()) {
-        call("/weather?id=\(cityId)", callback: callback);
+        call("/weather?id=\(cityId)", callback: callback)
     }
     
     // MARK: -
     // MARK: Retrieving daily forecast
     
     public func dailyForecast(cityName: String, callback: (Result) -> ()) {
-        call("/forecast/daily?q=\(cityName.replaceWhitespace())", callback: callback);
+        call("/forecast/daily?q=\(cityName.replaceWhitespace())", callback: callback)
     }
     
     public func dailyForecast(coordinate: CLLocationCoordinate2D, callback: (Result) -> ()) {
-        call("/forecast/daily?lat=\(coordinate.latitude)&lon=\(coordinate.longitude)", callback: callback);
+        call("/forecast/daily?lat=\(coordinate.latitude)&lon=\(coordinate.longitude)", callback: callback)
         
     }
     
     public func dailyForecast(cityId: Int, callback: (Result) -> ()) {
-        call("/forecast/daily?id=\(cityId)", callback: callback);
+        call("/forecast/daily?id=\(cityId)", callback: callback)
     }
     
     // MARK: -
     // MARK: Retrieving forecast
     
     public func forecast(cityName: String, callback: (Result) -> ()) {
-        call("/forecast?q=\(cityName.replaceWhitespace())", callback: callback);
+        call("/forecast?q=\(cityName.replaceWhitespace())", callback: callback)
     }
     
     public func forecast(coordinate: CLLocationCoordinate2D, callback:(Result) -> ()) {
-        call("/forecast?lat=\(coordinate.latitude)&lon=\(coordinate.longitude)", callback: callback);
+        call("/forecast?lat=\(coordinate.latitude)&lon=\(coordinate.longitude)", callback: callback)
     }
     
     public func forecast(cityId: Int, callback: (Result) ->()) {
-        call("/forecast?id=\(cityId)", callback: callback);
+        call("/forecast?id=\(cityId)", callback: callback)
     }
 
     // MARK: -
     // MARK: Retrieving city 
     
     public func findCity(cityName: String, callback: (Result) -> ()) {
-        call("/find?q=\(cityName.replaceWhitespace())", callback: callback);
+        call("/find?q=\(cityName.replaceWhitespace())", callback: callback)
     }
     
     public func findCity(coordinate: CLLocationCoordinate2D, callback: (Result) -> ()) {
-        call("/find?lat=\(coordinate.latitude)&lon=\(coordinate.longitude)", callback: callback);
+        call("/find?lat=\(coordinate.latitude)&lon=\(coordinate.longitude)", callback: callback)
     }
     
     // MARK: -
@@ -157,7 +157,7 @@ public class Sweather {
     private func call(method: String, callback: (Result) -> ()) {
         let url = Const.basePath + apiVersion + method + "&APPID=\(apiKey)&lang=\(language)&units=\(temperatureFormat.rawValue)"
         let request = NSURLRequest(URL: NSURL(string: url)!)
-        let currentQueue = NSOperationQueue.currentQueue();
+        let currentQueue = NSOperationQueue.currentQueue()
         
         NSURLConnection.sendAsynchronousRequest(request, queue: queue) { (response: NSURLResponse?, data: NSData?, error: NSError?) -> Void in
             var error: NSError? = error
@@ -165,9 +165,9 @@ public class Sweather {
             
             if let data = data {
                 do {
-                    dictionary = try NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers) as? NSDictionary;
+                    dictionary = try NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers) as? NSDictionary
                 } catch let e as NSError {
-                    error = e;
+                    error = e
                 }
             }
             currentQueue?.addOperationWithBlock {
