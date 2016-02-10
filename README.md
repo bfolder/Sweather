@@ -18,7 +18,7 @@ client.currentWeather("Berlin") { result in
 ---
 ### Requirements
 + Xcode 7
-+ iOS 7+ / Mac OS X 10.9+
++ iOS 8+ / Mac OS X 10.10+
 
 ---
 ### Installation
