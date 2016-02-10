@@ -64,8 +64,6 @@ public class Sweather {
     public var language: String
     public var temperatureFormat: TemperatureFormat
     
-    private var queue: NSOperationQueue
-    
     private struct Const {
         static let basePath = "http://api.openweathermap.org/data/"
     }
@@ -90,7 +88,6 @@ public class Sweather {
         self.temperatureFormat = temperatureFormat
         self.apiVersion = apiVersion
         self.language = language
-        self.queue = NSOperationQueue()
     }
     
     // MARK: -
@@ -159,7 +156,7 @@ public class Sweather {
         let request = NSURLRequest(URL: NSURL(string: url)!)
         let currentQueue = NSOperationQueue.currentQueue()
         
-        NSURLConnection.sendAsynchronousRequest(request, queue: queue) { (response: NSURLResponse?, data: NSData?, error: NSError?) -> Void in
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request){ data, response, error in
             var error: NSError? = error
             var dictionary: NSDictionary?
             
@@ -178,5 +175,6 @@ public class Sweather {
                 callback(result)
             }
         }
+        task.resume()
     }
 }
