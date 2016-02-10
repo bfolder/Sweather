@@ -22,7 +22,11 @@ client.currentWeather("Berlin") { result in
 
 ---
 ### Installation
-As for now, you can just drag & drop Sweather.swift into your project.
+You can just drag & drop Sweather.swift into your project, or add it via CocoaPods:
+
+```Ruby
+pod 'Sweather'
+```
 
 ---
 ## Licensing
