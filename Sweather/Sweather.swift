@@ -9,10 +9,10 @@ import Foundation
 import CoreLocation
 
 extension String {
-    func replace(string:String, replacement:String) -> String {
-        return self.stringByReplacingOccurrencesOfString(string,
-            withString: replacement,
-            options: NSStringCompareOptions.LiteralSearch,
+    func replace(_ string:String, replacement:String) -> String {
+        return self.replacingOccurrences(of: string,
+            with: replacement,
+            options: NSString.CompareOptions.literal,
             range: nil)
     }
     
@@ -21,28 +21,28 @@ extension String {
     }
 }
 
-public class Sweather {
+open class Sweather {
     public enum TemperatureFormat: String {
         case Celsius = "metric"
         case Fahrenheit = "imperial"
     }
     
     public enum Result {
-        case Success(NSURLResponse!, NSDictionary!)
-        case Error(NSURLResponse!, NSError!)
+        case success(URLResponse?, NSDictionary?)
+        case Error(URLResponse?, NSError?)
         
         public func data() -> NSDictionary? {
             switch self {
-            case .Success(_, let dictionary):
+            case .success(_, let dictionary):
                 return dictionary
             case .Error(_, _):
                 return nil
             }
         }
         
-        public func response() -> NSURLResponse? {
+        public func response() -> URLResponse? {
             switch self {
-            case .Success(let response, _):
+            case .success(let response, _):
                 return response
             case .Error(let response, _):
                 return response
@@ -51,7 +51,7 @@ public class Sweather {
         
         public func error() -> NSError? {
             switch self {
-            case .Success(_, _):
+            case .success(_, _):
                 return nil
             case .Error(_, let error):
                 return error
@@ -59,12 +59,12 @@ public class Sweather {
         }
     }
     
-    public var apiKey: String
-    public var apiVersion: String
-    public var language: String
-    public var temperatureFormat: TemperatureFormat
+    open var apiKey: String
+    open var apiVersion: String
+    open var language: String
+    open var temperatureFormat: TemperatureFormat
     
-    private struct Const {
+    fileprivate struct Const {
         static let basePath = "http://api.openweathermap.org/data/"
     }
     
@@ -93,88 +93,88 @@ public class Sweather {
     // MARK: -
     // MARK: Retrieving current weather data
     
-    public func currentWeather(cityName: String, callback: (Result) -> ()) {
+    open func currentWeather(_ cityName: String, callback: @escaping (Result) -> ()) {
         call("/weather?q=\(cityName.replaceWhitespace())", callback: callback)
     }
     
-    public func currentWeather(coordinate: CLLocationCoordinate2D, callback: (Result) -> ()) {
+    open func currentWeather(_ coordinate: CLLocationCoordinate2D, callback: @escaping (Result) -> ()) {
         let coordinateString = "lat=\(coordinate.latitude)&lon=\(coordinate.longitude)"
         call("/weather?\(coordinateString)", callback: callback)
     }
     
-    public func currentWeather(cityId: Int, callback: (Result) -> ()) {
+    open func currentWeather(_ cityId: Int, callback: @escaping (Result) -> ()) {
         call("/weather?id=\(cityId)", callback: callback)
     }
     
     // MARK: -
     // MARK: Retrieving daily forecast
     
-    public func dailyForecast(cityName: String, callback: (Result) -> ()) {
+    open func dailyForecast(_ cityName: String, callback: @escaping (Result) -> ()) {
         call("/forecast/daily?q=\(cityName.replaceWhitespace())", callback: callback)
     }
     
-    public func dailyForecast(coordinate: CLLocationCoordinate2D, callback: (Result) -> ()) {
+    open func dailyForecast(_ coordinate: CLLocationCoordinate2D, callback: @escaping (Result) -> ()) {
         call("/forecast/daily?lat=\(coordinate.latitude)&lon=\(coordinate.longitude)", callback: callback)
         
     }
     
-    public func dailyForecast(cityId: Int, callback: (Result) -> ()) {
+    open func dailyForecast(_ cityId: Int, callback: @escaping (Result) -> ()) {
         call("/forecast/daily?id=\(cityId)", callback: callback)
     }
     
     // MARK: -
     // MARK: Retrieving forecast
     
-    public func forecast(cityName: String, callback: (Result) -> ()) {
+    open func forecast(_ cityName: String, callback: @escaping (Result) -> ()) {
         call("/forecast?q=\(cityName.replaceWhitespace())", callback: callback)
     }
     
-    public func forecast(coordinate: CLLocationCoordinate2D, callback:(Result) -> ()) {
+    open func forecast(_ coordinate: CLLocationCoordinate2D, callback:@escaping (Result) -> ()) {
         call("/forecast?lat=\(coordinate.latitude)&lon=\(coordinate.longitude)", callback: callback)
     }
     
-    public func forecast(cityId: Int, callback: (Result) ->()) {
+    open func forecast(_ cityId: Int, callback: @escaping (Result) ->()) {
         call("/forecast?id=\(cityId)", callback: callback)
     }
 
     // MARK: -
     // MARK: Retrieving city 
     
-    public func findCity(cityName: String, callback: (Result) -> ()) {
+    open func findCity(_ cityName: String, callback: @escaping (Result) -> ()) {
         call("/find?q=\(cityName.replaceWhitespace())", callback: callback)
     }
     
-    public func findCity(coordinate: CLLocationCoordinate2D, callback: (Result) -> ()) {
+    open func findCity(_ coordinate: CLLocationCoordinate2D, callback: @escaping (Result) -> ()) {
         call("/find?lat=\(coordinate.latitude)&lon=\(coordinate.longitude)", callback: callback)
     }
     
     // MARK: -
     // MARK: Call the api
     
-    private func call(method: String, callback: (Result) -> ()) {
+    fileprivate func call(_ method: String, callback: @escaping (Result) -> ()) {
         let url = Const.basePath + apiVersion + method + "&APPID=\(apiKey)&lang=\(language)&units=\(temperatureFormat.rawValue)"
-        let request = NSURLRequest(URL: NSURL(string: url)!)
-        let currentQueue = NSOperationQueue.currentQueue()
+        let request = URLRequest(url: URL(string: url)!)
+        let currentQueue = OperationQueue.current
         
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request){ data, response, error in
-            var error: NSError? = error
+        let task = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
+            var error: NSError? = error as NSError?
             var dictionary: NSDictionary?
             
             if let data = data {
                 do {
-                    dictionary = try NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers) as? NSDictionary
+                    dictionary = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? NSDictionary
                 } catch let e as NSError {
                     error = e
                 }
             }
-            currentQueue?.addOperationWithBlock {
-                var result = Result.Success(response, dictionary)
+            currentQueue?.addOperation {
+                var result = Result.success(response, dictionary)
                 if error != nil {
                     result = Result.Error(response, error)
                 }
                 callback(result)
             }
-        }
+        })
         task.resume()
     }
 }

@@ -18,30 +18,30 @@ class ViewController: UIViewController, UITextFieldDelegate  {
     override func viewDidLoad() {
         super.viewDidLoad()
         client = Sweather(apiKey: "ea42045886608526507915df6b33b290")
-        activityIndicatorView?.hidden = true
+        activityIndicatorView?.isHidden = true
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if !textField.text!.isEmpty {
             textView?.text = ""
             textField.resignFirstResponder()
-            activityIndicatorView?.hidden = false
+            activityIndicatorView?.isHidden = false
             client?.currentWeather(textField.text!) { result in
-                self.activityIndicatorView?.hidden = true
+                self.activityIndicatorView?.isHidden = true
                 switch result {
                 case .Error(_, let error):
                     self.textView?.text = "Some error occured. Try again."
                     print("Error: \(error)")
-                case .Success(_, let dictionary):
+                case .success(_, let dictionary):
                     self.textView?.text = "Received data: \(dictionary)"
                     
                     // Get temperature for city this way
-                    if let city = dictionary["name"] as? String,
-                        temperature = dictionary["main"]!["temp"] as? Int {
+                    if let city = dictionary?["name"] as? String, let dict = dictionary?["main"] as? NSDictionary,
+                        let temperature = dict["temp"] as? Int {
                             print("City: \(city) Temperature: \(temperature)")
                     }
                 }

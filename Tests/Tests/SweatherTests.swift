@@ -33,166 +33,166 @@ class SweatherTests: XCTestCase {
     // MARK: Current weather
     
     func testCurrentWeatherByName() {
-        let expectation = expectationWithDescription("currentWeatherByName")
+        let exp = expectation(description: "currentWeatherByName")
         client.currentWeather("Berlin") { result in
-            let url = result.response()?.URL!.absoluteString
+            let url = result.response()?.url!.absoluteString
             let data = result.data()
             XCTAssertNotNil(url)
             XCTAssertEqual("http://api.openweathermap.org/data/2.5/weather?q=Berlin&APPID=ea42045886608526507915df6b33b290&lang=sp&units=metric", url!)
             XCTAssertNotNil(data)
             XCTAssertEqual(data!["name"] as? String, "Berlin")
-            expectation.fulfill()
+            exp.fulfill()
         }
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
     }
     
     func testCurrentWeatherById() {
-        let expectation = expectationWithDescription("currentWeatherById")
+        let exp = expectation(description: "currentWeatherById")
         client.currentWeather(2950159) { result in
-            let url = result.response()?.URL!.absoluteString
+            let url = result.response()?.url!.absoluteString
             let data = result.data()!
             XCTAssertNotNil(url)
             XCTAssertEqual("http://api.openweathermap.org/data/2.5/weather?id=2950159&APPID=ea42045886608526507915df6b33b290&lang=sp&units=metric", url!)
             XCTAssertNotNil(data)
             XCTAssertEqual(data["name"] as? String, "Berlin")
-            expectation.fulfill()
+            exp.fulfill()
         }
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
     }
     
     func testCurrentWeatherByCoordinate() {
-        let expectation = expectationWithDescription("currentWeatherById")
+        let exp = expectation(description: "currentWeatherById")
         client.currentWeather(CLLocationCoordinate2D(latitude: 52, longitude: 13)) { result in
-            let url = result.response()?.URL!.absoluteString
+            let url = result.response()?.url!.absoluteString
             let data = result.data()!
             XCTAssertNotNil(url)
             XCTAssertEqual("http://api.openweathermap.org/data/2.5/weather?lat=52.0&lon=13.0&APPID=ea42045886608526507915df6b33b290&lang=sp&units=metric", url!)
             XCTAssertNotNil(data)
             XCTAssertNotNil(data["name"] as! String)
-            expectation.fulfill()
+            exp.fulfill()
         }
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
     }
     
     // MARK: Daily forecast
     
     func testDailyForecastByName() {
-        let expectation = expectationWithDescription("dailyForecastByName")
+        let exp = expectation(description: "dailyForecastByName")
         client.dailyForecast("Berlin") { result in
-            let url = result.response()?.URL!.absoluteString
+            let url = result.response()?.url!.absoluteString
             let data = result.data()! as! Dictionary<String, AnyObject>
             let cityDict = data["city"]! as! Dictionary<String,AnyObject>
             XCTAssertNotNil(url)
             XCTAssertEqual("http://api.openweathermap.org/data/2.5/forecast/daily?q=Berlin&APPID=ea42045886608526507915df6b33b290&lang=sp&units=metric", url!)
             XCTAssertNotNil(data)
             XCTAssertEqual(cityDict["name"] as? String, "Berlin")
-            expectation.fulfill()
+            exp.fulfill()
         }
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
     }
     
     func testDailyForecastById() {
-        let expectation = expectationWithDescription("dailyForecastById")
+        let exp = expectation(description: "dailyForecastById")
         client.dailyForecast(2950159) { result in
-            let url = result.response()?.URL!.absoluteString
+            let url = result.response()?.url!.absoluteString
             let data = result.data()! as! Dictionary<String, AnyObject>
             let cityDict = data["city"]! as! Dictionary<String,AnyObject>
             XCTAssertNotNil(url)
             XCTAssertEqual("http://api.openweathermap.org/data/2.5/forecast/daily?id=2950159&APPID=ea42045886608526507915df6b33b290&lang=sp&units=metric", url!)
             XCTAssertNotNil(data)
             XCTAssertEqual(cityDict["name"] as? String, "Berlin")
-            expectation.fulfill()
+            exp.fulfill()
         }
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
     }
     
     func testDailyForecastByCoordinate() {
-        let expectation = expectationWithDescription("dailyForecastByCoordinate")
+        let exp = expectation(description: "dailyForecastByCoordinate")
         client.dailyForecast(CLLocationCoordinate2D(latitude: 52, longitude: 13)) { result in
-            let url = result.response()?.URL!.absoluteString
+            let url = result.response()?.url!.absoluteString
             let data = result.data()! as! Dictionary<String, AnyObject>
             let cityDict = data["city"] as? Dictionary<String,AnyObject>
             XCTAssertNotNil(url)
             XCTAssertEqual("http://api.openweathermap.org/data/2.5/forecast/daily?lat=52.0&lon=13.0&APPID=ea42045886608526507915df6b33b290&lang=sp&units=metric", url!)
             XCTAssertNotNil(data)
             XCTAssertNotNil(cityDict)
-            expectation.fulfill()
+            exp.fulfill()
         }
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
     }
     
     // MARK: Forecast
     
     func testForecastByName() {
-        let expectation = expectationWithDescription("dailyForecastByName")
+        let exp = expectation(description: "dailyForecastByName")
         client.forecast("Berlin") { result in
-            let url = result.response()?.URL!.absoluteString
+            let url = result.response()?.url!.absoluteString
             let data = result.data()! as! Dictionary<String, AnyObject>
             let cityDict = data["city"]! as! Dictionary<String,AnyObject>
             XCTAssertNotNil(url)
             XCTAssertEqual("http://api.openweathermap.org/data/2.5/forecast?q=Berlin&APPID=ea42045886608526507915df6b33b290&lang=sp&units=metric", url!)
             XCTAssertNotNil(data)
             XCTAssertEqual(cityDict["name"] as? String, "Berlin")
-            expectation.fulfill()
+            exp.fulfill()
         }
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
     }
     
     func testForecastById() {
-        let expectation = expectationWithDescription("dailyForecastById")
+        let exp = expectation(description: "dailyForecastById")
         client.forecast(2950159) { result in
-            let url = result.response()?.URL!.absoluteString
+            let url = result.response()?.url!.absoluteString
             let data = result.data()! as! Dictionary<String, AnyObject>
             let cityDict = data["city"]! as! Dictionary<String,AnyObject>
             XCTAssertNotNil(url)
             XCTAssertEqual("http://api.openweathermap.org/data/2.5/forecast?id=2950159&APPID=ea42045886608526507915df6b33b290&lang=sp&units=metric", url!)
             XCTAssertNotNil(data)
             XCTAssertEqual(cityDict["name"] as? String, "Berlin")
-            expectation.fulfill()
+            exp.fulfill()
         }
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
     }
     
     func testForecastByCoordinate() {
-        let expectation = expectationWithDescription("dailyForecastByCoordinate")
+        let exp = expectation(description: "dailyForecastByCoordinate")
         client.forecast(CLLocationCoordinate2D(latitude: 52, longitude: 13)) { result in
-            let url = result.response()?.URL!.absoluteString
+            let url = result.response()?.url!.absoluteString
             let data = result.data()! as! Dictionary<String, AnyObject>
             let cityDict = data["city"]! as! Dictionary<String,AnyObject>
             XCTAssertNotNil(url)
             XCTAssertEqual("http://api.openweathermap.org/data/2.5/forecast?lat=52.0&lon=13.0&APPID=ea42045886608526507915df6b33b290&lang=sp&units=metric", url!)
             XCTAssertNotNil(data)
             XCTAssertNotNil(cityDict["name"] as? String)
-            expectation.fulfill()
+            exp.fulfill()
         }
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
     }
     
     // MARK: Forecast
     
     func testFindCityByName() {
-        let expectation = expectationWithDescription("findCityByName")
+        let exp = expectation(description: "findCityByName")
         client.findCity("Berlin") { result in
-            let url = result.response()?.URL!.absoluteString
+            let url = result.response()?.url!.absoluteString
             let data = result.data()
             XCTAssertNotNil(url)
             XCTAssertEqual("http://api.openweathermap.org/data/2.5/find?q=Berlin&APPID=ea42045886608526507915df6b33b290&lang=sp&units=metric", url!)
             XCTAssertNotNil(data)
-            expectation.fulfill()
+            exp.fulfill()
         }
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
     }
     
     func testFindCityByCoordinate() {
-        let expectation = expectationWithDescription("findCityByCoordinate")
+        let exp = expectation(description: "findCityByCoordinate")
         client.findCity(CLLocationCoordinate2D(latitude: 52.0, longitude: 13.0)) { result in
-            let url = result.response()?.URL!.absoluteString
+            let url = result.response()?.url!.absoluteString
             let data = result.data()
             XCTAssertNotNil(url)
             XCTAssertEqual("http://api.openweathermap.org/data/2.5/find?lat=52.0&lon=13.0&APPID=ea42045886608526507915df6b33b290&lang=sp&units=metric", url!)
             XCTAssertNotNil(data)
-            expectation.fulfill()
+            exp.fulfill()
         }
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
     }
 }
